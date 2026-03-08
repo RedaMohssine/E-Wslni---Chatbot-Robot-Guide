@@ -88,6 +88,11 @@ def init_backend():
     load_dotenv()
     api_key = os.getenv("GOOGLE_API_KEY")
     if not api_key:
+        try:
+            api_key = st.secrets["GOOGLE_API_KEY"]
+        except (KeyError, FileNotFoundError):
+            pass
+    if not api_key:
         st.error("Missing GOOGLE_API_KEY in .env file")
         st.stop()
     client = genai.Client(api_key=api_key)

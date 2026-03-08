@@ -4,9 +4,6 @@ venv/
 # Environment variables / secrets
 .env
 
-# Vector store (regenerable)
-chroma_db/
-
 # Python
 __pycache__/
 *.py[cod]
