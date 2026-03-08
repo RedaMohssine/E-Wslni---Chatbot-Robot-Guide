@@ -1,0 +1,26 @@
+# Virtual environment
+venv/
+
+# Environment variables / secrets
+.env
+
+# Vector store (regenerable)
+chroma_db/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
