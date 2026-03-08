@@ -216,31 +216,43 @@ st.markdown("""
 :root {
     --primary: #0088b0;
     --primary-light: #00a0c0;
+    --primary-glow: rgba(0,136,176,0.12);
     --accent: #d04020;
-    --bg: #f0f4f6;
+    --bg: #f0f3f5;
     --surface: #ffffff;
     --text: #1e293b;
     --text-muted: #64748b;
-    --border: #dfe3ea;
-    --radius: 14px;
+    --border: #e2e7ed;
+    --radius: 16px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.08);
 }
 
 html, body, .stApp {
     font-family: 'Plus Jakarta Sans', sans-serif !important;
-    background: var(--bg) !important;
+    background: linear-gradient(160deg, #edf2f7 0%, #e8f0f4 40%, #f0f4f6 100%) !important;
 }
 
 /* --- Hide chrome --- */
 #MainMenu, footer, header { visibility: hidden; height: 0; }
 .stDeployButton { display: none; }
-.block-container { padding-top: 1.5rem !important; max-width: 800px !important; }
+.block-container { padding-top: 1.2rem !important; max-width: 820px !important; }
+
+/* Fix bottom input bar background */
+.stBottom, .stBottom > div, [data-testid="stBottom"],
+[data-testid="stBottom"] > div {
+    background: transparent !important;
+    background-color: transparent !important;
+}
 
 /* ================================================================
-   SIDEBAR  –  dark navy, proper inner styling
+   SIDEBAR
    ================================================================ */
 section[data-testid="stSidebar"] > div:first-child {
-    background: linear-gradient(180deg, #007a9a 0%, #005f78 100%) !important;
+    background: linear-gradient(180deg, #006d89 0%, #004d60 100%) !important;
     padding-top: 0 !important;
+    border-right: 1px solid rgba(0,136,176,0.15);
 }
 
 /* All text inside sidebar → light */
@@ -250,72 +262,88 @@ section[data-testid="stSidebar"] .stMarkdown p,
 section[data-testid="stSidebar"] .stMarkdown h4,
 section[data-testid="stSidebar"] span,
 section[data-testid="stSidebar"] .stCaption p {
-    color: #cbd5e1 !important;
+    color: #c8dce4 !important;
 }
 section[data-testid="stSidebar"] .stMarkdown h4 {
-    font-size: 0.78rem !important;
+    font-size: 0.7rem !important;
     text-transform: uppercase;
-    letter-spacing: 0.7px;
-    color: #ffffff !important;
-    font-weight: 700 !important;
-    margin-top: 0.5rem;
-    margin-bottom: 0.2rem;
+    letter-spacing: 1.2px;
+    color: rgba(255,255,255,0.55) !important;
+    font-weight: 600 !important;
+    margin-top: 0.6rem;
+    margin-bottom: 0.25rem;
 }
 section[data-testid="stSidebar"] hr {
-    border-color: rgba(255,255,255,0.08) !important;
-    margin: 0.8rem 0;
+    border-color: rgba(255,255,255,0.06) !important;
+    margin: 0.7rem 0;
 }
 
 /* Selectbox */
 section[data-testid="stSidebar"] .stSelectbox > div > div {
-    background: rgba(255,255,255,0.07) !important;
-    border: 1px solid rgba(255,255,255,0.12) !important;
-    border-radius: 8px !important;
+    background: rgba(255,255,255,0.06) !important;
+    border: 1px solid rgba(255,255,255,0.10) !important;
+    border-radius: 10px !important;
     color: #e2e8f0 !important;
+    transition: border-color 0.2s;
+}
+section[data-testid="stSidebar"] .stSelectbox > div > div:hover {
+    border-color: rgba(255,255,255,0.22) !important;
 }
 
 /* Toggle */
 section[data-testid="stSidebar"] .stToggle label span {
-    color: #cbd5e1 !important;
+    color: #c8dce4 !important;
 }
 
 /* Button */
 section[data-testid="stSidebar"] button[kind="secondary"],
 section[data-testid="stSidebar"] button {
-    background: rgba(208,64,32,0.12) !important;
-    border: 1px solid rgba(208,64,32,0.3) !important;
-    color: #e05535 !important;
-    border-radius: 8px !important;
+    background: rgba(255,255,255,0.06) !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    color: #ff8a70 !important;
+    border-radius: 10px !important;
     font-weight: 600 !important;
+    transition: all 0.2s;
 }
 section[data-testid="stSidebar"] button:hover {
-    background: rgba(208,64,32,0.22) !important;
+    background: rgba(255,255,255,0.12) !important;
+    border-color: rgba(255,100,70,0.3) !important;
 }
 
 /* Caption */
 section[data-testid="stSidebar"] .stCaption p {
-    color: rgba(255,255,255,0.3) !important;
-    font-size: 0.65rem !important;
+    color: rgba(255,255,255,0.25) !important;
+    font-size: 0.62rem !important;
+    letter-spacing: 0.3px;
 }
 
-/* --- Sidebar logo block --- */
+/* --- Sidebar brand block --- */
 .sb-logo-block {
     text-align: center;
-    padding: 1.5rem 1rem 0.6rem 1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    margin-bottom: 0.4rem;
+    padding: 1.8rem 1rem 1rem 1rem;
+    margin-bottom: 0.2rem;
+    position: relative;
+}
+.sb-logo-block::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    margin: 0.8rem auto 0;
 }
 .sb-logo-block .sb-name {
     color: #ffffff;
-    font-weight: 700;
-    font-size: 1rem;
-    margin-top: 0.55rem;
-    letter-spacing: 0.4px;
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: 1px;
 }
 .sb-logo-block .sb-sub {
-    color: rgba(255,255,255,0.4);
-    font-size: 0.68rem;
+    color: rgba(255,255,255,0.35);
+    font-size: 0.65rem;
     font-weight: 300;
+    letter-spacing: 0.5px;
+    margin-top: 0.2rem;
 }
 
 
@@ -325,73 +353,141 @@ section[data-testid="stSidebar"] .stCaption p {
    ================================================================ */
 .stChatMessage {
     background: var(--surface) !important;
-    border: 1px solid var(--border) !important;
+    border: none !important;
     border-radius: var(--radius) !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
-    margin-bottom: 0.55rem !important;
+    box-shadow: var(--shadow-sm) !important;
+    margin-bottom: 0.7rem !important;
+    padding: 1rem 1.2rem !important;
+    transition: box-shadow 0.2s;
+}
+.stChatMessage:hover {
+    box-shadow: var(--shadow-md) !important;
 }
 .stChatMessage p,
 .stChatMessage li,
 .stChatMessage span:not(.stButton span) {
-    color: #1e293b !important;
+    color: var(--text) !important;
+    line-height: 1.65 !important;
 }
+.stChatMessage li {
+    margin-bottom: 0.2rem;
+}
+
+/* User bubble */
 [data-testid="stChatMessage"][aria-label="user"] {
-    background: #eef7f9 !important;
-    border-color: #b2dce6 !important;
+    background: linear-gradient(135deg, #eaf5f8 0%, #e0f0f5 100%) !important;
+    border-left: 3px solid var(--primary) !important;
+}
+
+/* Assistant bubble */
+[data-testid="stChatMessage"][aria-label="assistant"] {
+    border-left: 3px solid #e2e7ed !important;
 }
 
 /* Chat input bar */
 .stChatInput > div {
-    border-radius: 12px !important;
+    border-radius: var(--radius) !important;
     border: 1px solid var(--border) !important;
+    background: var(--surface) !important;
+    box-shadow: var(--shadow-sm) !important;
+    transition: all 0.25s;
 }
 .stChatInput > div:focus-within {
     border-color: var(--primary) !important;
-    box-shadow: 0 0 0 2px rgba(0,136,176,0.10) !important;
+    box-shadow: 0 0 0 3px var(--primary-glow), var(--shadow-md) !important;
+}
+.stChatInput textarea,
+.stChatInput input,
+.stChatInput > div > div,
+.stChatInput button {
+    background: var(--surface) !important;
+    background-color: var(--surface) !important;
+}
+.stChatInput textarea {
+    color: var(--text) !important;
+}
+.stChatInput textarea::placeholder {
+    color: var(--text-muted) !important;
+    opacity: 0.6 !important;
 }
 
 /* Audio elements */
 audio {
     height: 32px !important;
-    border-radius: 8px !important;
+    border-radius: 10px !important;
     width: 100%;
+    margin-top: 0.3rem;
 }
 
 /* Source tags */
 .src-tag {
     display: inline-block;
-    background: #f1f5f9;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 2px 8px;
-    font-size: 0.7rem;
+    background: linear-gradient(135deg, #f1f5f9, #e8ecf1);
+    border: none;
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 0.68rem;
     color: var(--text-muted);
     margin: 2px 3px;
+    font-weight: 500;
 }
 
 /* ================================================================
-   SPEAKER BUTTON (per-message TTS) — inside chat bubbles
+   LISTEN BUTTON (per-message TTS)
    ================================================================ */
 .stChatMessage button {
-    background: #f1f5f9 !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 8px !important;
-    padding: 0.25rem 0.65rem !important;
-    font-size: 0.78rem !important;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e8ecf1 100%) !important;
+    border: none !important;
+    border-radius: 20px !important;
+    padding: 0.3rem 0.85rem !important;
+    font-size: 0.75rem !important;
     color: var(--text-muted) !important;
     cursor: pointer;
-    transition: all 0.15s;
+    transition: all 0.25s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 .stChatMessage button:hover {
-    background: #e2e8f0 !important;
-    border-color: var(--primary) !important;
-    color: var(--primary) !important;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary)) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0,136,176,0.25);
+    transform: translateY(-1px);
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: #b8c5d0; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ================================================================
+   THINKING ANIMATION
+   ================================================================ */
+.thinking-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.6rem 0;
+}
+.thinking-indicator .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+    animation: thinking-bounce 1.4s infinite ease-in-out both;
+}
+.thinking-indicator .dot:nth-child(1) { animation-delay: -0.32s; }
+.thinking-indicator .dot:nth-child(2) { animation-delay: -0.16s; }
+.thinking-indicator .dot:nth-child(3) { animation-delay: 0s; }
+.thinking-indicator .label {
+    margin-left: 6px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+@keyframes thinking-bounce {
+    0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
+    40% { transform: scale(1); opacity: 1; }
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -413,10 +509,10 @@ if "tts_audio" not in st.session_state:
 #  SIDEBAR
 # =====================================================================
 with st.sidebar:
-    st.markdown(f"""
+    st.markdown("""
     <div class="sb-logo-block">
-        <div class="sb-name">E-Wslni</div>
-        <div class="sb-sub">Autonomous Campus Guide</div>
+        <div class="sb-name">E - W s l n i</div>
+        <div class="sb-sub">EMINES &middot; UM6P Campus Guide</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -460,7 +556,7 @@ with st.sidebar:
         st.rerun()
 
     st.markdown("---")
-    st.caption("Powered by Gemini, Whisper & Edge TTS")
+    st.caption("Projet Robot Guide Intelligent — EMINES, UM6P")
 
 
 # =====================================================================
@@ -492,9 +588,8 @@ if audio_input is not None:
             transcription = transcribe_audio(audio_bytes)
         if transcription:
             st.session_state.messages.append({"role": "user", "content": transcription})
-            with st.spinner("Recherche..."):
-                answer, sources = ask(client, collection, transcription,
-                                      st.session_state.conversation_history)
+            answer, sources = ask(client, collection, transcription,
+                                  st.session_state.conversation_history)
             st.session_state.conversation_history.append((transcription, answer))
             msg = {"role": "assistant", "content": answer, "sources": list(sources)}
             if auto_tts:
@@ -546,10 +641,18 @@ if user_input:
         st.markdown(user_input)
 
     with st.chat_message("assistant"):
-        with st.spinner(""):
-            answer, sources = ask(client, collection, user_input,
-                                  st.session_state.conversation_history)
-            st.session_state.conversation_history.append((user_input, answer))
+        thinking = st.empty()
+        thinking.markdown(
+            '<div class="thinking-indicator">'
+            '<span class="dot"></span><span class="dot"></span><span class="dot"></span>'
+            '<span class="label">Recherche en cours...</span>'
+            '</div>',
+            unsafe_allow_html=True,
+        )
+        answer, sources = ask(client, collection, user_input,
+                              st.session_state.conversation_history)
+        st.session_state.conversation_history.append((user_input, answer))
+        thinking.empty()
 
         st.markdown(answer)
 
