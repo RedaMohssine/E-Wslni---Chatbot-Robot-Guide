@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🤖 E-Wslni — EMINES / UM6P Campus Assistant
+# E-Wslni — EMINES / UM6P Campus Assistant
 
 **An AI-powered campus guide chatbot built with RAG, Voice I/O & Streamlit**
 
@@ -13,7 +13,7 @@
 
 ---
 
-## 📌 Overview
+## Overview
 
 **E-Wslni** is a Retrieval-Augmented Generation (RAG) chatbot that answers questions about **EMINES – School of Industrial Management** and the **Université Mohammed VI Polytechnique (UM6P)**. It is designed to be integrated into an autonomous campus-guide robot.
 
@@ -21,40 +21,40 @@
 
 ---
 
-## ✨ Features
+## Features
 
 | Feature | Description |
 |---|---|
-| 🧠 **Semantic RAG** | Retrieves relevant chunks from ChromaDB and generates grounded answers with Gemini |
-| 🌍 **Multilingual** | Responds in the same language as the question (French, English, Arabic…) |
-| 🎤 **Voice Input** | Speech-to-text with OpenAI Whisper — speak your questions |
-| 🔊 **Voice Output** | Text-to-speech with Microsoft Edge TTS — free, high-quality, no API key |
-| 💬 **Web Interface** | Streamlit app with sidebar voice controls, per-message "Listen" button, and source display |
-| 🖥️ **Terminal Mode** | Text or voice chat loops for headless / robot deployment |
-| 🧾 **Conversation Memory** | Keeps the last 5 exchanges for context-aware follow-up answers |
+| **Semantic RAG** | Retrieves relevant chunks from ChromaDB and generates grounded answers with Gemini |
+| **Multilingual** | Responds in the same language as the question (French, English, Arabic…) |
+| **Voice Input** | Speech-to-text with OpenAI Whisper — speak your questions |
+| **Voice Output** | Text-to-speech with Microsoft Edge TTS — free, high-quality, no API key |
+| **Web Interface** | Streamlit app with sidebar voice controls, per-message "Listen" button, and source display |
+| **Terminal Mode** | Text or voice chat loops for headless / robot deployment |
+| **Conversation Memory** | Keeps the last 5 exchanges for context-aware follow-up answers |
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Data Pipeline
 
 ```mermaid
 flowchart LR
-    A["📄 Markdown & JSON\n(data/)"] -->|Load & Parse| B["✂️ Semantic Chunker\n(chunker.py)"]
-    B -->|320 chunks| C["🔢 Gemini Embeddings\n(embedder.py)"]
-    C -->|Store| D[("🗄️ ChromaDB\n(chroma_db/)")]
+    A["Markdown & JSON\n(data/)"] -->|Load & Parse| B["Semantic Chunker\n(chunker.py)"]
+    B -->|320 chunks| C["Gemini Embeddings\n(embedder.py)"]
+    C -->|Store| D[("ChromaDB\n(chroma_db/)")]
 ```
 
 ### RAG Query Flow
 
 ```mermaid
 flowchart TD
-    Q["❓ User Question"] --> E["🔢 Embed Query\n(Gemini Embedding 001)"]
-    E --> S["🔍 Similarity Search\n(ChromaDB — Top 5)"]
-    S --> P["📝 Build Augmented Prompt\n(System Prompt + Context + History)"]
-    P --> G["🤖 Generate Answer\n(Gemini 2.5 Flash)"]
-    G --> A["💬 Answer"]
+    Q["User Question"] --> E["Embed Query\n(Gemini Embedding 001)"]
+    E --> S["Similarity Search\n(ChromaDB — Top 5)"]
+    S --> P["Build Augmented Prompt\n(System Prompt + Context + History)"]
+    P --> G["Generate Answer\n(Gemini 2.5 Flash)"]
+    G --> A["Answer"]
 
     style Q fill:#0088b0,color:#fff
     style A fill:#0088b0,color:#fff
@@ -64,10 +64,10 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    MIC["🎤 Microphone"] -->|Record 5s| W["Whisper STT\n(base model)"]
+    MIC["Microphone"] -->|Record 5s| W["Whisper STT\n(base model)"]
     W -->|Text| RAG["RAG Pipeline"]
     RAG -->|Answer| TTS["Edge TTS\n(fr-FR-DeniseNeural)"]
-    TTS -->|Audio| SPK["🔊 Speaker"]
+    TTS -->|Audio| SPK["Speaker"]
 
     style MIC fill:#d04020,color:#fff
     style SPK fill:#d04020,color:#fff
@@ -78,7 +78,7 @@ flowchart LR
 ```mermaid
 graph TB
     subgraph "Data Ingestion (run once)"
-        D["📄 Source Docs"] --> CH["chunker.py"]
+        D["Source Docs"] --> CH["chunker.py"]
         CH --> EM["embedder.py"]
         EM --> DB[("ChromaDB")]
     end
@@ -105,7 +105,7 @@ graph TB
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 e-wslni/
@@ -123,7 +123,7 @@ e-wslni/
 
 ---
 
-## 🔧 Prerequisites
+## Prerequisites
 
 - **Python 3.10+**
 - A [Google Gemini API key](https://aistudio.google.com/apikey) (free tier is sufficient)
@@ -131,7 +131,7 @@ e-wslni/
 
 ---
 
-## 🚀 Setup
+## Setup
 
 ```bash
 # 1. Clone the repository
@@ -154,7 +154,7 @@ echo GOOGLE_API_KEY=your_key_here > .env
 
 ---
 
-## 📖 Usage
+## Usage
 
 ### 1. Build the vector store (first time only)
 
@@ -180,7 +180,7 @@ Open the URL printed in the terminal (default: `http://localhost:8501`).
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 | Variable | Location | Default | Description |
 |---|---|---|---|
@@ -192,7 +192,7 @@ Open the URL printed in the terminal (default: `http://localhost:8501`).
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ```mermaid
 mindmap
@@ -215,7 +215,7 @@ mindmap
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
 - [x] Semantic chunking pipeline
 - [x] RAG with Gemini
@@ -230,7 +230,7 @@ mindmap
 
 ---
 
-## 📄 License
+## License
 
 This project is for educational and research purposes at UM6P / EMINES.
 
@@ -238,6 +238,6 @@ This project is for educational and research purposes at UM6P / EMINES.
 
 <div align="center">
 
-**Built with ❤️ at [UM6P](https://www.um6p.ma) / [EMINES](https://www.emines-ingenieur.org)**
+**Built at [UM6P](https://www.um6p.ma) / [EMINES](https://www.emines-ingenieur.org)**
 
 </div>
