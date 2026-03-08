@@ -3,10 +3,6 @@ chromadb
 langchain-text-splitters
 google-genai
 google-generativeai
-openai-whisper
 edge-tts
-sounddevice
-scipy
 numpy
-pygame
 streamlit
