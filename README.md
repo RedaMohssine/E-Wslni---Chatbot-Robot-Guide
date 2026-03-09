@@ -229,13 +229,10 @@ mindmap
 - [ ] Multi-campus support
 
 ---
+## Deploy 
 
-## License
-
-This project is for educational and research purposes at UM6P / EMINES.
-
+You can test the Chatbot on its website: https://ewslni.streamlit.app/
 ---
-
 <div align="center">
 
 **Built at [UM6P](https://www.um6p.ma) / [EMINES](https://www.emines-ingenieur.org)**
