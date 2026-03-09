@@ -191,30 +191,6 @@ Open the URL printed in the terminal (default: `http://localhost:8501`).
 | `TTS_VOICE` | `app.py` | `fr-FR-DeniseNeural` | Default Edge TTS voice |
 
 ---
-
-## Tech Stack
-
-```mermaid
-mindmap
-  root((E-Wslni))
-    LLM
-      Google Gemini 2.5 Flash
-    Embeddings
-      Gemini Embedding 001
-    Vector Store
-      ChromaDB
-    Speech-to-Text
-      OpenAI Whisper base
-    Text-to-Speech
-      Microsoft Edge TTS
-    Web UI
-      Streamlit
-    Language
-      Python 3.11
-```
-
----
-
 ## Roadmap
 
 - [x] Semantic chunking pipeline
