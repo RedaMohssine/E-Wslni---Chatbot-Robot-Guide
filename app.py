@@ -127,12 +127,17 @@ def generate(client, question, context, history=None):
         for q, a in history[-5:]:
             conv += f"\nUtilisateur: {q}\nAssistant: {a}\n"
         conv += "\n---\n"
-    response = client.models.generate_content(
-        model=LLM_MODEL,
-        contents=f"{full_prompt}{conv}\n\n{question}",
-        config=types.GenerateContentConfig(temperature=0.3, max_output_tokens=4096),
-    )
-    return response.text
+    try:
+        response = client.models.generate_content(
+            model=LLM_MODEL,
+            contents=f"{full_prompt}{conv}\n\n{question}",
+            config=types.GenerateContentConfig(temperature=0.3, max_output_tokens=4096),
+        )
+        return response.text
+    except Exception as e:
+        if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
+            return "Desole, le quota d'utilisation de l'API est temporairement atteint. Veuillez reessayer dans quelques instants."
+        raise
 
 
 def ask(client, collection, question, history=None):
@@ -162,6 +167,13 @@ def tts_bytes(text, voice=TTS_VOICE):
 
 
 # --------------- STT ---------------
+WHISPER_AVAILABLE = True
+try:
+    import whisper as _whisper_test
+except ImportError:
+    WHISPER_AVAILABLE = False
+
+
 @st.cache_resource
 def load_whisper():
     import whisper
@@ -169,6 +181,8 @@ def load_whisper():
 
 
 def transcribe_audio(audio_bytes):
+    if not WHISPER_AVAILABLE:
+        return ""
     import numpy as np
     import wave
 
@@ -547,10 +561,14 @@ with st.sidebar:
 
     st.markdown("---")
     st.markdown("#### Microphone")
-    audio_input = st.audio_input(
-        "Press to record, press again to stop",
-        label_visibility="collapsed",
-    )
+    if WHISPER_AVAILABLE:
+        audio_input = st.audio_input(
+            "Press to record, press again to stop",
+            label_visibility="collapsed",
+        )
+    else:
+        audio_input = None
+        st.caption("Voice input unavailable on cloud")
 
     st.markdown("---")
     if st.button("Clear conversation", use_container_width=True):
